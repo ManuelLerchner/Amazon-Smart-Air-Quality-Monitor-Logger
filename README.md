@@ -24,14 +24,20 @@ All the captured data is stored in a database. In my case I use a MongoDB databa
     }
     ```
 
+2. Run pip to install the dependencies:
+
+    ```bash
+    pip3 install -r requirements.txt
+    ```
+
 2. Create a `cronjob` to run the script every 10 minutes. You can use (https://crontab.guru/)[https://crontab.guru] to generate the cronjob.
 
     ```bash
-    cronjob -e
+    crontab -e
     ```
 
     Enter the following line:
 
     ```bash
-    10 * * * * /usr/bin/python3 /path/to/script.py
+    */10 * * * * cd /path/to/script && /usr/bin/python3 main.py > /tmp/alexa-exporter.log 2>&1
     ```
