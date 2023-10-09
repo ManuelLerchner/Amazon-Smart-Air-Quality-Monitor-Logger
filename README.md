@@ -24,13 +24,15 @@ All the captured data is stored in a database. In my case I use a MongoDB databa
     }
     ```
 
+    You can get the device_id and the cookies from [https://alexa.amazon.de/api/phoenix/group/](https://alexa.amazon.de/api/phoenix/group). The device id starts with `AAA_SonarCloudService_`, and the cookies can be copied via the F12-Menu.
+
 2. Run pip to install the dependencies:
 
     ```bash
     pip3 install -r requirements.txt
     ```
 
-2. Create a `cronjob` to run the script every 10 minutes. You can use (https://crontab.guru/)[https://crontab.guru] to generate the cronjob.
+2. Create a `cronjob` to run the script every 10 minutes. You can use [https://crontab.guru/](https://crontab.guru) to generate the cronjob.
 
     ```bash
     crontab -e
