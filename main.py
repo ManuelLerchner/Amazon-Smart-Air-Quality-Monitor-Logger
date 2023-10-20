@@ -79,8 +79,8 @@ def result_parser(response):
         particulate_matter=particulate_matter,
         carbon_monoxide=carbon_monoxide,
         quality_score=quality_score,
-        date=str(datetime.datetime.now())
-    )
+        date=datetime.datetime.now().isoformat()
+   )
 
 
 def get_air_quality():
