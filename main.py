@@ -2,6 +2,7 @@ import datetime
 import json
 import requests
 from pymongo import MongoClient
+import os
 
 from util import notification_helper, upload_to_db
 
@@ -80,7 +81,7 @@ def result_parser(response):
         carbon_monoxide=carbon_monoxide,
         quality_score=quality_score,
         date=datetime.datetime.now().isoformat()
-   )
+    )
 
 
 def get_air_quality():
@@ -97,5 +98,20 @@ def get_air_quality():
 if __name__ == "__main__":
     try:
         air_data = get_air_quality()
+
+        if os.path.exists("error.txt"):
+            os.remove("error.txt")
     except Exception as e:
-        notification_helper(NOTIFICATION_URL, e)
+        print("Error: ", e)
+
+        if os.path.exists("error.txt"):
+            with open("error.txt", "r") as f:
+                error = f.read()
+                if error == str(e):
+                    print("Error already sent")
+                    exit()
+        else:
+            with open("error.txt", "w") as f:
+                f.write(str(e))
+
+        notification_helper(NOTIFICATION_URL, str(e))
